@@ -11,7 +11,7 @@ source $script_dir/../common/common-functions.sh
 
 # default variables
 install_dir="$HOME"
-data_dir=Configuration/linux/tmux/
+data_dir=Configuration/linux/tmux
 
 # get install dir from parameters
 while [ "$1" != "" ]; do
@@ -37,11 +37,13 @@ else # otherwise create backup
 	fi
 fi
 
-expression="source-file $install-dir/$data_dir/.tmux.conf"
+expression="source-file $install_dir/$data_dir/.tmux.conf"
 append_to_file_if_not_exist "$expression" "$default_config_file"
 
 # append linking to theme folder
-ln -s "$install_dir/$data_dir/" ~/.tmux-conf-dir
+ln -sfn "$install_dir/$data_dir" ~/.tmux-conf-dir
 
 # sourcing tmux config within application
 tmux new-session -d -s my_session "source-file ~/.tmux.conf"
+
+echo "linking to tmux set"
