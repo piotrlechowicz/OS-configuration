@@ -11,7 +11,7 @@ source $script_dir/../common/common-functions.sh
 
 # default variables
 install_dir="$HOME"
-data_dir=.configuration/linux/tmux
+data_dir=.configuration/linux/zsh
 
 # get install dir from parameters
 while [ "$1" != "" ]; do
@@ -26,7 +26,7 @@ done
 # assure absolute installation path
 install_dir=$(readlink -f $install_dir)
 
-default_config_file=~/.tmux.conf
+default_config_file=~/.zshrc
 
 # create default config file if not exists
 if [ ! -f $default_config_file ]; then
@@ -37,13 +37,7 @@ else # otherwise create backup
 	fi
 fi
 
-expression="source-file $install_dir/$data_dir/.tmux.conf"
-append_to_file_if_not_exist "$expression" "$default_config_file"
+ln -sF $install_dir/$data_dir/.zshrc ~/.zshrc
+ln -sF $install_dir/$data_dir/.my-zsh-themes ~/.my-zsh-themes
 
-# append linking to theme folder
-ln -sfn "$install_dir/$data_dir" ~/.tmux-conf-dir
-
-# sourcing tmux config within application
-tmux new-session -d -s my_session "source-file ~/.tmux.conf"
-
-echo "linking to tmux set"
+echo "linking to zsh set"

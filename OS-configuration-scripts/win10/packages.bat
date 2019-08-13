@@ -7,9 +7,6 @@
 :: install all the packages
 :: -y confirm yes for any prompt during the install process
 
-:: some windows tools
-choco install -y powershell-core
-
 :: staff for working
 choco install -y firefox
 choco install -y notepadplusplus
@@ -24,6 +21,8 @@ choco install -y filezilla
 choco install -y microsoft-windows-terminala
 choco install -y googledrive
 choco install -y keepassxc
+choco install -y intellijidea-ultimate
+choco install -y maven
 
 :: Email client
 choco install -y mailspring
@@ -36,3 +35,6 @@ choco install -y goggalaxy
 
 :: music
 choco install -y spotify
+
+:: enable WSL
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux	

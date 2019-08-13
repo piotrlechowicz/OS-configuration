@@ -12,7 +12,7 @@ source $script_dir/../common/common-functions.sh
 # default variables
 install_dir="$HOME"
 data_location=$script_dir/../../../data
-data_dir=.configuration/linux/tmux
+data_dir=.configuration/linux/zsh
 
 # get install dir from parameters
 while [ "$1" != "" ]; do
@@ -34,4 +34,4 @@ cd "$script_dir"
 # copy required files
 cp -r $data_location/$data_dir/. "$install_dir/$data_dir"
 
-echo "tmux config set"
+echo "zsh config set"
