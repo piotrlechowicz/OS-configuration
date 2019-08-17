@@ -1,5 +1,5 @@
 #! /usr/bin/bash
-# set file linking for tmux
+# set file linking for vim
 # 
 # parameters:
 # --install-dir : installation directory

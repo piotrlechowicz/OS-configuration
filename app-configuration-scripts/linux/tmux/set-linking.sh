@@ -1,5 +1,5 @@
 #! /usr/bin/bash
-# copying of vim configuration data
+# set file linking for tmux
 # 
 # parameters:
 # --install-dir : installation directory
@@ -10,8 +10,8 @@ source $script_dir/../common/common-script-init-settings.sh
 source $script_dir/../common/common-functions.sh
 
 # default variables
+default_install_dir="$HOME"
 install_dir="$HOME"
-data_location=$script_dir/data
 
 # get install dir from parameters
 while [ "$1" != "" ]; do
@@ -25,22 +25,11 @@ done
 
 # assure absolute installation path
 install_dir=$(readlink -f $install_dir)
-# create if needed installation directory
-mkdir -p "$install_dir"
 
-# backup .vimrc
-config_file=~/.vimrc
-if [ -f $config_file ]; then
-	if [ ! -f $config_file.bak ]; then
-		cp $config_file $config_file.bak
-	fi
+# create links if install_dir is different than the default one
+if [ ! "$install_dir" == "$default_install_dir" ]; then
+	ln -sfn "$install_dir/.tmux.conf" $default_install_dir/.tmux.conf
+	ln -sfn "$install_dir/.tmux-themes" $default_install_dir/.tmux-themes
 fi
 
-# go to script dir
-cd "$script_dir"
-# copy required files
-cp -r $data_location/. "$install_dir/"
-
-echo "vim config set"
-
-sh ./set-linking.sh
+echo "linking to tmux set"

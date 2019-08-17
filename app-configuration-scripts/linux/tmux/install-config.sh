@@ -1,5 +1,5 @@
 #! /usr/bin/bash
-# copying of vim configuration data
+# copying of tmux configuration data
 # 
 # parameters:
 # --install-dir : installation directory
@@ -28,8 +28,8 @@ install_dir=$(readlink -f $install_dir)
 # create if needed installation directory
 mkdir -p "$install_dir"
 
-# backup .vimrc
-config_file=~/.vimrc
+# backup .tmux.conf
+config_file=~/.tmux.conf
 if [ -f $config_file ]; then
 	if [ ! -f $config_file.bak ]; then
 		cp $config_file $config_file.bak
@@ -41,6 +41,9 @@ cd "$script_dir"
 # copy required files
 cp -r $data_location/. "$install_dir/"
 
-echo "vim config set"
+echo "tmux config set"
 
 sh ./set-linking.sh
+
+# sourcing tmux config within application
+tmux new-session -d -s my_session "source-file ~/.tmux.conf"
