@@ -4,3 +4,5 @@
 
 :: staff for recording
 choco install -y itunes
+choco install -y asio4all
+choco install -y musescore

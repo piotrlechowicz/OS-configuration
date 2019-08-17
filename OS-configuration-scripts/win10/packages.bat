@@ -21,8 +21,7 @@ choco install -y filezilla
 choco install -y microsoft-windows-terminala
 choco install -y googledrive
 choco install -y keepassxc
-choco install -y intellijidea-ultimate
-choco install -y maven
+choco install -y winrar
 
 :: Email client
 choco install -y mailspring

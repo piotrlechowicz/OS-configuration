@@ -1,5 +1,5 @@
 #! /usr/bin/bash
-# copying of basic packages configuration data
+# set file linking for tmux
 # 
 # parameters:
 # --install-dir : installation directory
@@ -10,9 +10,8 @@ source $script_dir/../common/common-script-init-settings.sh
 source $script_dir/../common/common-functions.sh
 
 # default variables
+default_install_dir="$HOME"
 install_dir="$HOME"
-data_location=$script_dir/../../../data
-data_dir=.configuration/linux/tmux
 
 # get install dir from parameters
 while [ "$1" != "" ]; do
@@ -26,12 +25,10 @@ done
 
 # assure absolute installation path
 install_dir=$(readlink -f $install_dir)
-# create if needed installation directory
-mkdir -p "$install_dir/$data_dir"
 
-# go to script dir
-cd "$script_dir"
-# copy required files
-cp -r $data_location/$data_dir/. "$install_dir/$data_dir"
+# create links if install_dir is different than the default one
+if [ ! "$install_dir" == "$default_install_dir" ]; then
+	ln -sfn "$install_dir/.vimrc" $default_install_dir/.vimrc
+fi
 
-echo "tmux config set"
+echo "linking to vim set"

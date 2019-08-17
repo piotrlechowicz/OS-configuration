@@ -1,5 +1,5 @@
 #! /usr/bin/bash
-# copying of basic packages configuration data
+# copying of zsh configuration data
 # 
 # parameters:
 # --install-dir : installation directory
@@ -11,8 +11,7 @@ source $script_dir/../common/common-functions.sh
 
 # default variables
 install_dir="$HOME"
-data_location=$script_dir/../../../data
-data_dir=.configuration/linux/zsh
+data_location=$script_dir/data
 
 # get install dir from parameters
 while [ "$1" != "" ]; do
@@ -27,11 +26,22 @@ done
 # assure absolute installation path
 install_dir=$(readlink -f $install_dir)
 # create if needed installation directory
-mkdir -p "$install_dir/$data_dir"
+mkdir -p "$install_dir"
+
+# backup .zshrc
+config_file=~/.zshrc
+if [ -f $config_file ]; then
+	if [ ! -f $config_file.bak ]; then
+		cp $config_file $config_file.bak
+	fi
+fi
 
 # go to script dir
 cd "$script_dir"
 # copy required files
-cp -r $data_location/$data_dir/. "$install_dir/$data_dir"
+cp -r $data_location/. "$install_dir/"
 
 echo "zsh config set"
+
+sh ./set-linking.sh
+

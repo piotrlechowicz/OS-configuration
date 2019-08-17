@@ -3,7 +3,6 @@
 #-------------------------
 sudo dnf install -y tmux
 sh ../../app-configuration-scripts/linux/tmux/install-config.sh
-sh ../../app-configuration-scripts/linux/tmux/set-linking.sh
 
 #-------------------------
 # install zsh
@@ -14,4 +13,9 @@ wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - 
 # setting template configuration
 cp ~/.oh-my-zsh/templates/zshrc/zsh-template ~/.zshrc
 sh ../../app-configuration-scripts/linux/zsh/install-config.sh
-sh ../../app-configuration-scripts/linux/zsh/set-linking.sh
+
+#-------------------------
+# install vim
+#-------------------------
+sudo dnf install -y vim
+sh ../../app-configuration-scripts/linux/vim/install-config.sh
